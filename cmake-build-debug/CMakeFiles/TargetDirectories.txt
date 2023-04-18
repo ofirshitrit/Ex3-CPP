@@ -1,0 +1,3 @@
+/home/ofir/CLionProjects/Ex3-cpp/cmake-build-debug/CMakeFiles/Ex3_cpp.dir
+/home/ofir/CLionProjects/Ex3-cpp/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ofir/CLionProjects/Ex3-cpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
