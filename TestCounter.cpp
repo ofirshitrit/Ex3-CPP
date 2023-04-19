@@ -21,7 +21,7 @@ struct ReporterCounter: public ConsoleReporter {
 };
 
 REGISTER_REPORTER("counter", 1, ReporterCounter);
-
+//
 //int main(int argc, char** argv) {
 //    Context context;
 //    context.addFilter("reporters", "counter");
