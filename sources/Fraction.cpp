@@ -6,34 +6,34 @@ using namespace std;
 
 namespace ariel {
 
-//
-//Fraction::Fraction(int numer, int dumer) : numerator(numer), denominator(dumer)
-//{
-//    if (dumer == 0) throw  invalid_argument("can not divide in zero");
-//}
-//
-//
-//Fraction::Fraction(float num) : numerator(static_cast<int>((float)num * precision)) , denominator(precision )
-//{
-//    int n = 0;
-//    float p = num;
-//
-//    while (p - floor(p) > 0) {
-//        p *= 10;
-//        n++;
-//    }
-//
-//    int r = gcd(p, pow(10,n));
-//    p /= r;
-//    setNumerator(r);
-//    setDenominator( pow(10,n) / r);
-//}
+
+    Fraction::Fraction(int numer, int dumer)
+    {
+        if (dumer == 0) throw invalid_argument("Cannot divide by zero.");
+        this->numerator = numer;
+        this->denominator = dumer;
+    }
 
 
+    Fraction::Fraction(float num) {
+        int n = 0;
+        float p = num;
 
-    ostream &operator<<(ostream &ostr, const Fraction &frac) {
-        ostr << frac.numerator << "/" << frac.denominator;
-        return ostr;
+        while (p - floor(p) > 0) {
+            p *= 10;
+            n++;
+        }
+
+        int r = gcd(p, pow(10, n));
+        p /= r;
+        setNumerator(r);
+        setDenominator(pow(10, n) / r);
+    }
+
+
+    ostream &operator<<(ostream &ost, const Fraction &frac) {
+        ost << frac.numerator << "/" << frac.denominator;
+        return ost;
     }
 
     istream &operator>>(istream &input, Fraction &frac) {
@@ -65,6 +65,7 @@ namespace ariel {
     }
 
     Fraction operator/(const Fraction &frac1, const Fraction &frac2) {
+        if (frac2 == 0) throw invalid_argument("Cannot divide by zero.");
         Fraction tmp(frac2);
         tmp.swapNumerAndDenom();
         return frac1 * tmp;

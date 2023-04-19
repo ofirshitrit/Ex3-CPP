@@ -1,4 +1,5 @@
-
+#ifndef FRACTION_HPP
+#define FRACTION_HPP
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -8,9 +9,9 @@ namespace ariel {
     class Fraction {
 
     public:
-        Fraction(int numer, int dumer) : numerator(numer), denominator(dumer) {}
+        Fraction(int numer, int dumer);
 
-        Fraction(float num) : numerator(static_cast<int>((float) num * precision)), denominator(precision) {}
+        Fraction(float num);
 
         ~Fraction() = default;
 
@@ -69,3 +70,4 @@ namespace ariel {
 
     };
 }
+#endif
