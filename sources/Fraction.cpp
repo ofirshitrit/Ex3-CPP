@@ -28,6 +28,7 @@ namespace ariel {
         p /= r;
         setNumerator(r);
         setDenominator(pow(10, n) / r);
+        this->reduceFraction();
     }
 
 
@@ -68,34 +69,53 @@ namespace ariel {
         if (frac2 == 0) throw invalid_argument("Cannot divide by zero.");
         Fraction tmp(frac2);
         tmp.swapNumerAndDenom();
-        return frac1 * tmp;
+        Fraction res = frac1 * tmp;
+        res.reduceFraction();
+        return res;
     }
 
     bool operator>=(const Fraction &frac1, const Fraction &frac2) {
-        return (frac1.getNumerator() * frac2.getDenominator()) >= (frac2.getNumerator() * frac1.getDenominator());
-
+        Fraction f1 = frac1;
+        Fraction f2 = frac2;
+        f1.reduceFraction();
+        f2.reduceFraction();
+        return (f1.getNumerator() * f2.getDenominator()) >= (f2.getNumerator() * f1.getDenominator());
     }
 
     bool operator<=(const Fraction &frac1, const Fraction &frac2) {
-        return (frac1.getNumerator() * frac2.getDenominator()) <= (frac2.getNumerator() * frac1.getDenominator());
+        Fraction f1 = frac1;
+        Fraction f2 = frac2;
+        f1.reduceFraction();
+        f2.reduceFraction();
+        return (f1.getNumerator() * f2.getDenominator()) <= (f2.getNumerator() * f1.getDenominator());
 
     }
 
     bool operator>(const Fraction &frac1, const Fraction &frac2) {
-        return (frac1.getNumerator() * frac2.getDenominator()) > (frac2.getNumerator() * frac1.getDenominator());
+        Fraction f1 = frac1;
+        Fraction f2 = frac2;
+        f1.reduceFraction();
+        f2.reduceFraction();
+        return (f1.getNumerator() * f2.getDenominator()) > (f2.getNumerator() * f1.getDenominator());
 
     }
 
     bool operator<(const Fraction &frac1, const Fraction &frac2) {
-        return (frac1.getNumerator() * frac2.getDenominator()) < (frac2.getNumerator() * frac1.getDenominator());
+        Fraction f1 = frac1;
+        Fraction f2 = frac2;
+        f1.reduceFraction();
+        f2.reduceFraction();
+        return (f1.getNumerator() * f2.getDenominator()) < (f2.getNumerator() * f1.getDenominator());
     }
 
     bool operator==(const Fraction &frac1, const Fraction &frac2) {
         Fraction f1 = frac1;
         Fraction f2 = frac2;
+        if (f1.getNumerator() * f2.getDenominator() == f1.getDenominator() * f2.getNumerator()) return true;
+        if ((f1.getNumerator() < 0 && f2.getNumerator() > 0 )|| (f1.getNumerator() > 0 && f2.getNumerator() < 0 )) return false;
         f1.reduceFraction();
         f2.reduceFraction();
-        return (f1.getDenominator() == f2.getDenominator() && f1.getNumerator() == f2.getNumerator());
+        return (f1.getDenominator() == f2.getDenominator() && -f1.getNumerator() == f2.getNumerator());
     }
 
     bool operator!=(const Fraction &frac1, const Fraction &frac2) {

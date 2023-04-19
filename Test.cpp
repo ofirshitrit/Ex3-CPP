@@ -90,7 +90,7 @@ TEST_CASE("Check no errors in the print")
 TEST_CASE("Check all operations works with float numbers")
 {
     Fraction a (1, 2);
-
+    cout << (1+a) << endl;
     CHECK((1 + a) == Fraction(3,2));
     CHECK((a - 1) == Fraction(-1,2));
     CHECK((2 * a) == Fraction(1,1));
