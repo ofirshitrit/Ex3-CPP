@@ -62,7 +62,6 @@ namespace ariel {
     private:
         int numerator;
         int denominator;
-        static constexpr int precision = 1000;
 
         int gcd(int a, int b);
 

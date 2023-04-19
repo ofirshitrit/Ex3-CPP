@@ -7,8 +7,7 @@ using namespace std;
 namespace ariel {
 
 
-    Fraction::Fraction(int numer, int dumer)
-    {
+    Fraction::Fraction(int numer, int dumer) {
         if (dumer == 0) throw invalid_argument("Cannot divide by zero.");
         this->numerator = numer;
         this->denominator = dumer;
@@ -16,19 +15,18 @@ namespace ariel {
 
 
     Fraction::Fraction(float num) {
+
         int n = 0;
         float p = num;
-
-        while (p - floor(p) > 0) {
+        while( p - floor(p) > 0)
+        {
             p *= 10;
             n++;
         }
-
-        int r = gcd(p, pow(10, n));
-        p /= r;
-        setNumerator(r);
-        setDenominator(pow(10, n) / r);
+        this->numerator = p;
+        this->denominator = pow(10,n);
         this->reduceFraction();
+
     }
 
 
@@ -112,7 +110,8 @@ namespace ariel {
         Fraction f1 = frac1;
         Fraction f2 = frac2;
         if (f1.getNumerator() * f2.getDenominator() == f1.getDenominator() * f2.getNumerator()) return true;
-        if ((f1.getNumerator() < 0 && f2.getNumerator() > 0 )|| (f1.getNumerator() > 0 && f2.getNumerator() < 0 )) return false;
+        if ((f1.getNumerator() < 0 && f2.getNumerator() > 0) || (f1.getNumerator() > 0 && f2.getNumerator() < 0))
+            return false;
         f1.reduceFraction();
         f2.reduceFraction();
         return (f1.getDenominator() == f2.getDenominator() && -f1.getNumerator() == f2.getNumerator());

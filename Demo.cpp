@@ -20,17 +20,15 @@ using namespace ariel;
 int main() {
 
 
-    Fraction a(4, 5);
-//    cout << "a-1 = " << (a-1) << endl;
-//    cout << ((a - 1) == Fraction(-1, 2)) << endl;
-    if ( (a-1) == Fraction(1,-5)) cout << "true" << endl;
-    else cout << "false" << endl;
-//    cout << ((2 * a) == Fraction(1, 1)) << endl;
-//    cout <<  "2*a = " << (2*a) << endl;
-//     cout << ((1.5 / a) == Fraction(3, 1) ) << endl;
-//     cout << "(1.5 / a) = " << (1.5 / a) << endl;
+    Fraction a(1, 2);
+    cout << ((2 * a) == Fraction(1, 1)) << endl;
+    cout <<  "2*a = " << (2*a) << endl;
+//    cout << "(1.5 / a) = " << (1.5 / a) << endl;
+//    cout << ((1.5 / a) == Fraction(3, 1) ) << endl;
+//    Fraction b(1.5);
+//    cout << b << endl;
 
-
+//    cout << () << endl;
 
 //    Fraction a(2, 4), b(1, 4);
 //    Fraction c(2.5);
@@ -60,3 +58,4 @@ int main() {
 //    cout << (a != b) << endl; //1
 
 }
+

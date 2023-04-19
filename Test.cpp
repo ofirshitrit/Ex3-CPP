@@ -60,25 +60,25 @@ TEST_CASE("Check comperators")
 TEST_CASE("Check pre and post fix")
 {
     Fraction a(2, 4), b(3, 2), c(5, 2);
-    CHECK((++a) == b);
-    CHECK((a++) == b);
-    CHECK(a == c);
+    CHECK(((++a) == b));
+    CHECK(((a++) == b));
+    CHECK((a == c));
 }
 
 TEST_CASE("Check pre and post fix")
 {
     Fraction a(2, 4), b(3, 2), c(5, 2);
-    CHECK((--c) == b);
-    CHECK((c--) == b);
-    CHECK(c == a);
+    CHECK(((--c) == b));
+    CHECK(((c--) == b));
+    CHECK((c == a));
 }
 
 TEST_CASE("Check reducing fractures")
 {
     Fraction a(3, 9), b(45, 100), c(9, 63);
-    CHECK(a == Fraction(1, 3));
-    CHECK(b == Fraction(9, 20));
-    CHECK(c == Fraction(1, 7));
+    CHECK((a == Fraction(1, 3)));
+    CHECK((b == Fraction(9, 20)));
+    CHECK((c == Fraction(1, 7)));
 }
 
 TEST_CASE("Check no errors in the print")
@@ -90,17 +90,16 @@ TEST_CASE("Check no errors in the print")
 TEST_CASE("Check all operations works with float numbers")
 {
     Fraction a (1, 2);
-    cout << (1+a) << endl;
-    CHECK((1 + a) == Fraction(3,2));
-    CHECK((a - 1) == Fraction(-1,2));
-    CHECK((2 * a) == Fraction(1,1));
-    CHECK((1.5 / a) == Fraction(3,1));
-    CHECK((a > 0.5) == false);
-    CHECK((a < 0.99) == true);
-    CHECK((a <= 0.678) == true);
-    CHECK((a >= 2) == false);
-    CHECK((a != 0.3333) == true);
-    CHECK((a == 0.5) == true);
-    CHECK_THROWS(a/0);
+    CHECK(((1 + a) == Fraction(3,2)));
+    CHECK(((a - 1) == Fraction(-1,2)));
+    CHECK(((2 * a) == Fraction(1,1)));
+    CHECK(((1.5 / a) == Fraction(3,1)));
+    CHECK(((a > 0.5) == false));
+    CHECK(((a < 0.99) == true));
+    CHECK(((a <= 0.678) == true));
+    CHECK(((a >= 2) == false));
+    CHECK(((a != 0.3333) == true));
+    CHECK(((a == 0.5) == true));
+    CHECK_THROWS((a/0));
 
 }
