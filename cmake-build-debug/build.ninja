@@ -55,23 +55,29 @@ build CMakeFiles/Ex3_cpp.dir/Demo.cpp.o: CXX_COMPILER__Ex3_cpp_Debug /home/ofir/
   OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
   OBJECT_FILE_DIR = CMakeFiles/Ex3_cpp.dir
 
-build CMakeFiles/Ex3_cpp.dir/Test.cpp.o: CXX_COMPILER__Ex3_cpp_Debug /home/ofir/CLionProjects/Ex3-cpp/Test.cpp || cmake_object_order_depends_target_Ex3_cpp
-  DEP_FILE = CMakeFiles/Ex3_cpp.dir/Test.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
-  OBJECT_FILE_DIR = CMakeFiles/Ex3_cpp.dir
-
-build CMakeFiles/Ex3_cpp.dir/TestCounter.cpp.o: CXX_COMPILER__Ex3_cpp_Debug /home/ofir/CLionProjects/Ex3-cpp/TestCounter.cpp || cmake_object_order_depends_target_Ex3_cpp
-  DEP_FILE = CMakeFiles/Ex3_cpp.dir/TestCounter.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
-  OBJECT_FILE_DIR = CMakeFiles/Ex3_cpp.dir
-
 build CMakeFiles/Ex3_cpp.dir/sources/Fraction.cpp.o: CXX_COMPILER__Ex3_cpp_Debug /home/ofir/CLionProjects/Ex3-cpp/sources/Fraction.cpp || cmake_object_order_depends_target_Ex3_cpp
   DEP_FILE = CMakeFiles/Ex3_cpp.dir/sources/Fraction.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
   OBJECT_FILE_DIR = CMakeFiles/Ex3_cpp.dir/sources
+
+build CMakeFiles/Ex3_cpp.dir/StudentTest1.cpp.o: CXX_COMPILER__Ex3_cpp_Debug /home/ofir/CLionProjects/Ex3-cpp/StudentTest1.cpp || cmake_object_order_depends_target_Ex3_cpp
+  DEP_FILE = CMakeFiles/Ex3_cpp.dir/StudentTest1.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/Ex3_cpp.dir
+
+build CMakeFiles/Ex3_cpp.dir/StudentTest2.cpp.o: CXX_COMPILER__Ex3_cpp_Debug /home/ofir/CLionProjects/Ex3-cpp/StudentTest2.cpp || cmake_object_order_depends_target_Ex3_cpp
+  DEP_FILE = CMakeFiles/Ex3_cpp.dir/StudentTest2.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/Ex3_cpp.dir
+
+build CMakeFiles/Ex3_cpp.dir/TestRunner.cpp.o: CXX_COMPILER__Ex3_cpp_Debug /home/ofir/CLionProjects/Ex3-cpp/TestRunner.cpp || cmake_object_order_depends_target_Ex3_cpp
+  DEP_FILE = CMakeFiles/Ex3_cpp.dir/TestRunner.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/Ex3_cpp.dir
 
 
 # =============================================================================
@@ -81,7 +87,7 @@ build CMakeFiles/Ex3_cpp.dir/sources/Fraction.cpp.o: CXX_COMPILER__Ex3_cpp_Debug
 #############################################
 # Link the executable Ex3_cpp
 
-build Ex3_cpp: CXX_EXECUTABLE_LINKER__Ex3_cpp_Debug CMakeFiles/Ex3_cpp.dir/Demo.cpp.o CMakeFiles/Ex3_cpp.dir/Test.cpp.o CMakeFiles/Ex3_cpp.dir/TestCounter.cpp.o CMakeFiles/Ex3_cpp.dir/sources/Fraction.cpp.o
+build Ex3_cpp: CXX_EXECUTABLE_LINKER__Ex3_cpp_Debug CMakeFiles/Ex3_cpp.dir/Demo.cpp.o CMakeFiles/Ex3_cpp.dir/sources/Fraction.cpp.o CMakeFiles/Ex3_cpp.dir/StudentTest1.cpp.o CMakeFiles/Ex3_cpp.dir/StudentTest2.cpp.o CMakeFiles/Ex3_cpp.dir/TestRunner.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/Ex3_cpp.dir
   POST_BUILD = :

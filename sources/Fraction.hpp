@@ -9,11 +9,12 @@ namespace ariel {
     class Fraction {
 
     public:
+        Fraction();
         Fraction(int numer, int dumer);
 
         Fraction(float num);
 
-        ~Fraction() = default;
+//        ~Fraction() = default;
 
         friend ostream &operator<<(ostream &ostr, const Fraction &frac);
 
