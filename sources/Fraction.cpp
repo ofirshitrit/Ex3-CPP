@@ -46,10 +46,10 @@ namespace ariel {
     }
 
     istream &operator>>(istream &input, Fraction &frac) {
-        int numer = 0 , denom = 0;
+        int numer = 0, denom = 0;
         char slash;
         input >> numer >> denom;
-        if (denom == 0) throw invalid_argument("Cannot divide by zero.");
+        if (denom == 0) throw runtime_error("Cannot divide by zero.");
         frac.setNumerator(numer);
         frac.setDenominator(denom);
         frac.reduceFraction();
@@ -113,10 +113,35 @@ namespace ariel {
     bool operator==(const Fraction &frac1, const Fraction &frac2) {
         Fraction f1 = frac1;
         Fraction f2 = frac2;
-
         f1.reduceFraction();
         f2.reduceFraction();
-        return (f1.getDenominator() == f2.getDenominator() && -f1.getNumerator() == f2.getNumerator());
+
+        // Compare signs
+        //case 1: -1/5 == 1/-5
+        if (((f1.getNumerator() < 0) && (f1.getDenominator() > 0)) && ((f2.getNumerator() < 0) && (f2.getDenominator() > 0)))
+        {
+            f1 = f1 * (-1);
+            f2 = f2 * (-1);
+        }
+        //case 2: 1/-5 == -1/5
+        else if (((f1.getNumerator() > 0) && (f1.getDenominator() < 0)) && ((f2.getNumerator() > 0) && (f2.getDenominator() < 0)))
+        {
+            f1 = f1 * (-1);
+            f2 = f2 * (-1);
+        }
+        //case 3: -1/-5 == 1/5
+        else if (((f1.getNumerator() < 0) && (f1.getDenominator() < 0)) && ((f2.getNumerator() > 0) && (f2.getDenominator() > 0)))
+        {
+            f1 = f1 * (-1);
+        }
+        //case 4: 1/5 == -1/-5
+        else if (((f1.getNumerator() > 0) && (f1.getDenominator() > 0)) && ((f2.getNumerator() < 0) && (f2.getDenominator() < 0)))
+        {
+            f2 = f2 * (-1);
+        }
+
+
+        return (f1.getNumerator() == f2.getNumerator() && f1.getDenominator() == f2.getDenominator());
     }
 
     bool operator!=(const Fraction &frac1, const Fraction &frac2) {

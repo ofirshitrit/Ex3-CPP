@@ -19,12 +19,13 @@ using namespace ariel;
 int main() {
 
 
-
-
-    Fraction a{9, 35} , b(7,888);
-    cout << " a*b = " << Fraction{12345, 23456} * Fraction{34567, 45678} << endl;
-
-
+    std::stringstream ss;
+    ss.str("");
+    Fraction neg_frac2{3, -4};
+    ss << neg_frac2;
+    cout <<  ss.str() << endl;
+    if ( ss.str() == "3/-4" ) cout << "YES" << endl;
+    else cout << "NO" << endl;
 
 
 //    Fraction a(5,3), b(14,21);
