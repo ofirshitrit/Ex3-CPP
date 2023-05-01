@@ -64,9 +64,11 @@ namespace ariel {
         int numerator;
         int denominator;
 
-        int gcd(int a, int b);
+        int gcd(int num1, int num2);
 
         void swapNumerAndDenom();
+
+
 
     };
 }

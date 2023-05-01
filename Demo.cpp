@@ -19,13 +19,14 @@ using namespace ariel;
 int main() {
 
 
-    std::stringstream ss;
-    ss.str("");
-    Fraction neg_frac2{3, -4};
-    ss << neg_frac2;
-    cout <<  ss.str() << endl;
-    if ( ss.str() == "3/-4" ) cout << "YES" << endl;
-    else cout << "NO" << endl;
+    Fraction f(-4,5);
+    cout << "f= " << f << endl;
+    float complex  = -3.141;
+    if ( complex < f ) cout << "yes" << endl;
+    else cout << "noo" << endl;
+
+    Fraction f2 = complex;
+    cout << f2;
 
 
 //    Fraction a(5,3), b(14,21);
