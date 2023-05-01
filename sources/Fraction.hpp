@@ -58,15 +58,12 @@ namespace ariel {
 
         void reduceFraction();
 
-        Fraction turnToFrac(float x);
-
     private:
         int numerator;
         int denominator;
 
         int gcd(int num1, int num2);
 
-        void swapNumerAndDenom();
 
 
 
