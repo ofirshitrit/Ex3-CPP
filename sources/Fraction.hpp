@@ -20,25 +20,49 @@ namespace ariel {
 
         friend istream &operator>>(istream &input, Fraction &frac);
 
-        friend Fraction operator+(const Fraction &frac1, const Fraction &frac2);
+        Fraction operator+(const Fraction &frac);
+        friend Fraction operator+(float num, const Fraction &frac);
+//        Fraction operator+(float num);
 
-        friend Fraction operator-(const Fraction &frac1, const Fraction &frac2);
+        Fraction operator-(const Fraction &frac);
+        friend Fraction operator-(float num, const Fraction &frac);
+//        Fraction operator-(float num);
 
-        friend Fraction operator/(const Fraction &frac1, const Fraction &frac2);
+        Fraction operator*(const Fraction &frac);
+        friend Fraction operator*(float num, const Fraction &frac);
+//        Fraction operator*(float num);
 
-        friend Fraction operator*(const Fraction &frac1, const Fraction &frac2);
+        Fraction operator/(const Fraction &frac);
+        friend Fraction operator/(float num, const Fraction &frac);
+//        Fraction operator/(float num);
 
-        friend bool operator>=(const Fraction &frac1, const Fraction &frac2);
+        bool operator>=(const Fraction &frac) const;
+        friend bool operator>=(float num, const Fraction &frac);
+//        Fraction operator>=(float num);
 
-        friend bool operator<=(const Fraction &frac1, const Fraction &frac2);
+        bool operator<=(const Fraction &frac) const;
+        friend bool operator<=(float num, const Fraction &frac);
+//        Fraction operator<=(float num);
 
-        friend bool operator>(const Fraction &frac1, const Fraction &frac2);
+        bool operator>(const Fraction &frac) const;
+        friend bool operator>(float num, const Fraction &frac);
+//        Fraction operator>(float num);
 
-        friend bool operator<(const Fraction &frac1, const Fraction &frac2);
+        bool operator<(const Fraction &frac) const;
+        friend bool operator<(float num, const Fraction &frac);
+//        Fraction operator<(float num);
+
 
         friend bool operator==(const Fraction &frac1, const Fraction &frac2);
 
         friend bool operator!=(const Fraction &frac1, const Fraction &frac2);
+//        bool operator==(const Fraction &frac) const;
+//        friend bool operator==(float num, const Fraction &frac);
+////        Fraction operator==(float num);
+//
+//        bool operator!=(const Fraction &frac) const;
+//        friend bool operator!=(float num, const Fraction &frac);
+////        Fraction operator!=(float num);
 
         Fraction &operator++();
 
@@ -57,6 +81,7 @@ namespace ariel {
         void setDenominator(int denominator);
 
         void reduceFraction();
+        void checkOverFlow(long numerator ,long denominator);
 
     private:
         int numerator;
