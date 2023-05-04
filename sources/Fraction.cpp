@@ -2,13 +2,17 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-#include <climits>
+
 using namespace std;
 
 namespace ariel {
 
-    Fraction::Fraction() : numerator(0) , denominator(1){} //default
+    Fraction::Fraction()  //default
+    {
+        this->numerator = 1;
+        this->denominator = 1;
 
+    }
 
     Fraction::Fraction(int numer, int dumer) {
         if (dumer == 0) throw invalid_argument("Cannot divide by zero.");
@@ -17,7 +21,22 @@ namespace ariel {
     }
 
 
-    Fraction::Fraction(float num) : numerator(num*1000) , denominator(1000){
+    Fraction::Fraction(float num) {
+        // Get the first three digits after the decimal point
+        int n = 0;
+        float p = num;
+        while (n < 3 && p - floor(p) > 0) {
+            p *= 10;
+            n++;
+        }
+        // Round the float to the nearest integer
+        int rounded = round(p);
+
+        // Set the numerator and denominator based on the rounded value
+        this->numerator = rounded;
+        this->denominator = pow(10, n);
+
+        // Reduce the fraction
         this->reduceFraction();
     }
 
@@ -38,49 +57,36 @@ namespace ariel {
     }
 
     Fraction operator+(const Fraction &frac1, const Fraction &frac2) {
-        long numer = static_cast<long>(frac1.getNumerator()) * frac2.getDenominator() + static_cast<long>(frac2.getNumerator()) * frac1.getDenominator();
-        long denom = static_cast<long>(frac1.getDenominator()) * frac2.getDenominator();
-        if (numer > INT_MAX || numer < INT_MIN ||  denom > INT_MAX || denom < INT_MIN) {
-            throw overflow_error("Fraction overflow error");
-        }
-        Fraction result((int)numer,(int)denom);
+        int numerator = frac1.getNumerator() * frac2.getDenominator() + frac2.getNumerator() * frac1.getDenominator();
+        int denominator = frac1.getDenominator() * frac2.getDenominator();
+        Fraction result(numerator, denominator);
         result.reduceFraction();
         return result;
     }
 
     Fraction operator-(const Fraction &frac1, const Fraction &frac2) {
-        long numer = static_cast<long>(frac1.getNumerator()) * frac2.getDenominator() - static_cast<long>(frac2.getNumerator()) * frac1.getDenominator();
-        long denom = static_cast<long>(frac1.getDenominator()) * frac2.getDenominator();
-        if (numer > INT_MAX || numer < INT_MIN ||  denom > INT_MAX || denom < INT_MIN) {
-            throw overflow_error("Fraction overflow error");
-        }
-        Fraction result((int)numer,(int)denom);
-//        result.reduceFraction();
+        int numerator = frac1.getNumerator() * frac2.getDenominator() - frac2.getNumerator() * frac1.getDenominator();
+        int denominator = frac1.getDenominator() * frac2.getDenominator();
+        Fraction result(numerator, denominator);
+        result.reduceFraction();
         return result;
     }
 
     Fraction operator*(const Fraction &frac1, const Fraction &frac2) {
-        long numer = static_cast<long> (frac1.getNumerator()) * frac2.getNumerator();
-        long denom = static_cast<long> (frac1.getDenominator()) * frac2.getDenominator();
-        if (numer > INT_MAX || numer < INT_MIN ||  denom > INT_MAX || denom < INT_MIN) {
-            throw overflow_error("Fraction overflow error");
-        }
-        Fraction result((int) numer, (int)denom);
+        int numerator = frac1.getNumerator() * frac2.getNumerator();
+        int denominator = frac1.getDenominator() * frac2.getDenominator();
+        Fraction result(numerator, denominator);
         result.reduceFraction();
         return result;
     }
 
-
     Fraction operator/(const Fraction &frac1, const Fraction &frac2) {
         if (frac2 == 0) throw runtime_error("Cannot divide by zero.");
-        long numer = static_cast<long> (frac1.getNumerator()) * static_cast<long> (frac2.getDenominator());
-        long denom = static_cast<long> (frac1.getDenominator()) * static_cast<long> (frac2.getNumerator());
-        if (numer > INT_MAX || numer < INT_MIN ||  denom > INT_MAX || denom < INT_MIN) {
-            throw overflow_error("Fraction overflow error");
-        }
-        Fraction result((int) numer, (int)denom);
-        result.reduceFraction();
-        return result;
+        Fraction tmp(frac2);
+        tmp.swapNumerAndDenom();
+        Fraction res = frac1 * tmp;
+        res.reduceFraction();
+        return res;
     }
 
     bool operator>=(const Fraction &frac1, const Fraction &frac2) {
@@ -105,14 +111,41 @@ namespace ariel {
     }
 
     bool operator==(const Fraction &frac1, const Fraction &frac2) {
-        //only 3 digits after the decimal point
-        int f1 = ((int)(frac1.getNumerator() * 1000 / frac1.getDenominator()) % 1000);
-        int f2 = ((int)(frac2.getNumerator() * 1000 / frac2.getDenominator()) % 1000);
-        return f1 == f2;
+        Fraction f1 = frac1;
+        Fraction f2 = frac2;
+        f1.reduceFraction();
+        f2.reduceFraction();
+
+        // Compare signs
+        //case 1: -1/5 == 1/-5
+        if (((f1.getNumerator() < 0) && (f1.getDenominator() > 0)) && ((f2.getNumerator() < 0) && (f2.getDenominator() > 0)))
+        {
+            f1 = f1 * (-1);
+            f2 = f2 * (-1);
+        }
+        //case 2: 1/-5 == -1/5
+        else if (((f1.getNumerator() > 0) && (f1.getDenominator() < 0)) && ((f2.getNumerator() > 0) && (f2.getDenominator() < 0)))
+        {
+            f1 = f1 * (-1);
+            f2 = f2 * (-1);
+        }
+        //case 3: -1/-5 == 1/5
+        else if (((f1.getNumerator() < 0) && (f1.getDenominator() < 0)) && ((f2.getNumerator() > 0) && (f2.getDenominator() > 0)))
+        {
+            f1 = f1 * (-1);
+        }
+        //case 4: 1/5 == -1/-5
+        else if (((f1.getNumerator() > 0) && (f1.getDenominator() > 0)) && ((f2.getNumerator() < 0) && (f2.getDenominator() < 0)))
+        {
+            f2 = f2 * (-1);
+        }
+
+
+        return (f1.getNumerator() == f2.getNumerator() && f1.getDenominator() == f2.getDenominator());
     }
 
     bool operator!=(const Fraction &frac1, const Fraction &frac2) {
-        return (frac1.getNumerator() * frac2.getDenominator()) != (frac2.getNumerator() * frac1.getDenominator());
+        return !(frac1 == frac2);
     }
 
     Fraction &Fraction::operator++() {
@@ -140,16 +173,16 @@ namespace ariel {
     }
 
 
-    int Fraction::gcd(int num1, int num2) {
-        if (num2 == 0) {
-            return num1;
+    int Fraction::gcd(int a, int b) {
+        if (b == 0) {
+            return a;
         } else {
-            return gcd(num2, num1 % num2);
+            return gcd(b, a % b);
         }
     }
 
     void Fraction::reduceFraction() {
-        int commonFactor = gcd(numerator,denominator);
+        int commonFactor = gcd(this->numerator, this->denominator);
         numerator /= commonFactor;
         denominator /= commonFactor;
     }
@@ -176,7 +209,4 @@ namespace ariel {
     void Fraction::setDenominator(int denominator) {
         Fraction::denominator = denominator;
     }
-
-
-
 }

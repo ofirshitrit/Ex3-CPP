@@ -207,7 +207,7 @@ TEST_SUITE("Overloaded < and > operators tests") {
 TEST_SUITE("Overloaded + and - operator tests") {
 
     TEST_CASE("Basic addition and subtraction") {
-//         Small fractions
+         Small fractions
         CHECK_EQ(Fraction{1, 4} + Fraction{1, 4}, Fraction{1, 2});
         CHECK_EQ(Fraction{2, 5} - Fraction{1, 3}, Fraction{1, 15});
 
