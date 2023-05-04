@@ -37,46 +37,10 @@ namespace ariel {
         frac.reduceFraction();
         return input;
     }
-    Fraction Fraction::operator+(const Fraction &frac) {
-        long numer = static_cast<long>(this->getNumerator()) * frac.getDenominator() + static_cast<long>(frac.getNumerator()) * this->getDenominator();
-        long denom = static_cast<long>(this->getDenominator()) * frac.getDenominator();
-        checkOverFlow(numer,denom);
-        Fraction result((int)numer,(int)denom);
-        result.reduceFraction();
-        return result;
-    }
-    Fraction operator+(float num,const Fraction &frac2) {
-        long numer = static_cast<long>(num*1000) * frac2.getDenominator() + static_cast<long>(frac2.getNumerator()) * 1000;
-        long denom = static_cast<long>(1000) * frac2.getDenominator();
-        int max_int = std::numeric_limits<int>::max();
-        int min_int = std::numeric_limits<int>::min();
-        if (numer > max_int || numer < min_int ||  denom > max_int || denom < min_int) {
-            throw overflow_error("Fraction overflow error");
-        }
-        Fraction result((int)numer,(int)denom);
-        result.reduceFraction();
-        return result;
-    }
-//    Fraction Fraction::operator+(float num) {
-//        long numer = static_cast<long>(this->getNumerator()) * 1000 + static_cast<long>(num*1000) * this->getDenominator();
-//        long denom = static_cast<long>(this->getDenominator()) * 1000;
-//        checkOverFlow(numer,denom);
-//        Fraction result((int)numer,(int)denom);
-//        result.reduceFraction();
-//        return result;
-//    }
 
-    Fraction Fraction::operator-(const Fraction &frac) {
-        long numer = static_cast<long>(this->getNumerator()) * frac.getDenominator() - static_cast<long>(frac.getNumerator()) * this->getDenominator();
-        long denom = static_cast<long>(this->getDenominator()) * frac.getDenominator();
-        checkOverFlow(numer,denom);
-        Fraction result((int)numer,(int)denom);
-        result.reduceFraction();
-        return result;
-    }
-    Fraction operator-(float num, const Fraction &frac) {
-        long numer = static_cast<long>(num*1000) * frac.getDenominator() - static_cast<long>(frac.getNumerator()) * 1000;
-        long denom = static_cast<long>(1000) * frac.getDenominator();
+    Fraction operator+(const Fraction &frac1, const Fraction &frac2) {
+        long numer = static_cast<long>(frac1.getNumerator()) * frac2.getDenominator() + static_cast<long>(frac2.getNumerator()) * frac1.getDenominator();
+        long denom = static_cast<long>(frac1.getDenominator()) * frac2.getDenominator();
         int max_int = std::numeric_limits<int>::max();
         int min_int = std::numeric_limits<int>::min();
         if (numer > max_int || numer < min_int ||  denom > max_int || denom < min_int) {
@@ -87,46 +51,39 @@ namespace ariel {
         return result;
     }
 
-    Fraction Fraction::operator*(const Fraction &frac) {
-        long numer = static_cast<long> (this->getNumerator()) * frac.getNumerator();
-        long denom = static_cast<long> (this->getDenominator()) * frac.getDenominator();
-        checkOverFlow(numer,denom);
+    Fraction operator-(const Fraction &frac1, const Fraction &frac2) {
+        long numer = static_cast<long>(frac1.getNumerator()) * frac2.getDenominator() - static_cast<long>(frac2.getNumerator()) * frac1.getDenominator();
+        long denom = static_cast<long>(frac1.getDenominator()) * frac2.getDenominator();
+        int max_int = std::numeric_limits<int>::max();
+        int min_int = std::numeric_limits<int>::min();
+        if (numer > max_int || numer < min_int ||  denom > max_int || denom < min_int) {
+            throw overflow_error("Fraction overflow error");
+        }
+        Fraction result((int)numer,(int)denom);
+        result.reduceFraction();
+        return result;
+    }
+
+    Fraction operator*(const Fraction &frac1, const Fraction &frac2) {
+        long numer = static_cast<long> (frac1.getNumerator()) * frac2.getNumerator();
+        long denom = static_cast<long> (frac1.getDenominator()) * frac2.getDenominator();
+        int max_int = std::numeric_limits<int>::max();
+        int min_int = std::numeric_limits<int>::min();
+        if (numer > max_int || numer < min_int ||  denom > max_int || denom < min_int) {
+            throw overflow_error("Fraction overflow error");
+        }
         Fraction result((int) numer, (int)denom);
         result.reduceFraction();
         return result;
     }
 
-    Fraction operator*(float num, const Fraction &frac) {
-        long numer = static_cast<long> (num*1000) * frac.getNumerator();
-        long denom = static_cast<long> (1000) * frac.getDenominator();
-        int max_int = std::numeric_limits<int>::max();
-        int min_int = std::numeric_limits<int>::min();
-        if (numer > max_int || numer < min_int ||  denom > max_int || denom < min_int) {
-            throw overflow_error("Fraction overflow error");
-        }
-        Fraction result((int)numer,(int)denom);
-        result.reduceFraction();
-        return result;
-    }
 
-    Fraction Fraction::operator/(const Fraction &frac) {
-        if (frac.getNumerator() == 0){
+    Fraction operator/(const Fraction &frac1, const Fraction &frac2) {
+        if (frac2.getNumerator() == 0){
             throw runtime_error("Illegal to division by 0");
         }
-        long numer = static_cast<long> (this->getNumerator()) * static_cast<long> (frac.getDenominator());
-        long denom = static_cast<long> (this->getDenominator()) * static_cast<long> (frac.getNumerator());
-        checkOverFlow(numer,denom);
-        Fraction result((int) numer, (int)denom);
-        result.reduceFraction();
-        return result;
-    }
-
-    Fraction operator/(float num, const Fraction &frac) {
-        if (frac.getNumerator() == 0){
-            throw runtime_error("Illegal to division by 0");
-        }
-        long numer = static_cast<long> (num*1000) * static_cast<long> (frac.getDenominator());
-        long denom = static_cast<long> (1000) * static_cast<long> (frac.getNumerator());
+        long numer = static_cast<long> (frac1.getNumerator()) * static_cast<long> (frac2.getDenominator());
+        long denom = static_cast<long> (frac1.getDenominator()) * static_cast<long> (frac2.getNumerator());
         int max_int = std::numeric_limits<int>::max();
         int min_int = std::numeric_limits<int>::min();
         if (numer > max_int || numer < min_int ||  denom > max_int || denom < min_int) {
@@ -137,35 +94,22 @@ namespace ariel {
         return result;
     }
 
-    bool Fraction::operator>=(const Fraction &frac) const {
-        return (this->getNumerator() * frac.getDenominator()) >= (frac.getNumerator() * this->getDenominator());
+    bool operator>=(const Fraction &frac1, const Fraction &frac2) {
+        return (frac1.getNumerator() * frac2.getDenominator()) >= (frac2.getNumerator() * frac1.getDenominator());
     }
 
-    bool operator>=(float num, const Fraction &frac ) {
-        return ((int)(num*1000) * frac.getDenominator()) >= (frac.getNumerator() * 1000);
-    }
-    bool Fraction::operator<=(const Fraction &frac) const {
-        return (this->getNumerator() * frac.getDenominator()) <= (frac.getNumerator() * this->getDenominator());
+    bool operator<=(const Fraction &frac1, const Fraction &frac2) {
+
+        return (frac1.getNumerator() * frac2.getDenominator()) <= (frac2.getNumerator() * frac1.getDenominator());
+
     }
 
-    bool operator<=(float num, const Fraction &frac ) {
-        return ((int)(num*1000) * frac.getDenominator()) <= (frac.getNumerator() * 1000);
+    bool operator>(const Fraction& num1, const Fraction& num2){
+        return num1.getNumerator() * num2.getDenominator() > num2.getNumerator() * num1.getDenominator();
     }
 
-    bool Fraction::operator>(const Fraction &frac) const {
-        return (this->getNumerator() * frac.getDenominator()) > (frac.getNumerator() * this->getDenominator());
-    }
-
-    bool operator>(float num, const Fraction &frac ) {
-        return ((int)(num*1000) * frac.getDenominator()) > (frac.getNumerator() * 1000);
-    }
-
-    bool operator<(float num, const Fraction &frac ) {
-        return ((int)(num*1000) * frac.getDenominator()) < (frac.getNumerator() * 1000);
-    }
-
-    bool Fraction::operator<(const Fraction &frac) const {
-        return (this->getNumerator() * frac.getDenominator()) < (frac.getNumerator() * this->getDenominator());
+    bool operator<(const Fraction& num1, const Fraction& num2){
+        return num1.getNumerator() * num2.getDenominator() < num2.getNumerator() * num1.getDenominator();
     }
 
     bool operator==(const Fraction &frac1, const Fraction &frac2) {
@@ -178,29 +122,6 @@ namespace ariel {
     bool operator!=(const Fraction &frac1, const Fraction &frac2) {
         return (frac1.getNumerator() * frac2.getDenominator()) != (frac2.getNumerator() * frac1.getDenominator());
     }
-
-//    bool operator==(float num, const Fraction &frac ) {
-//        //only 3 digits after the decimal point
-//        int f1 = (int)(num*1000);
-//        int f2 = (int)(frac.getNumerator() * 1000) ;
-//        return f1 == f2;
-//    }
-//
-//    bool Fraction::operator==(const Fraction &frac) const {
-//        //only 3 digits after the decimal point
-//        int f1 = ((this->getNumerator() * 1000 / this->getDenominator()) % 1000);
-//        int f2 = ((frac.getNumerator() * 1000 / frac.getDenominator()) % 1000);
-//        return f1 == f2;
-//    }
-//
-//
-//    bool operator!=(float num, const Fraction &frac) {
-//        return ((int)(num*1000) * frac.getDenominator()) != (frac.getNumerator() * 1000);
-//    }
-//
-//    bool Fraction::operator!=(const Fraction &frac) const{
-//        return (this->getNumerator() * frac.getDenominator()) != (frac.getNumerator() * this->getDenominator());
-//    }
 
     Fraction &Fraction::operator++() {
         Fraction tmp = *this;
@@ -263,13 +184,6 @@ namespace ariel {
         Fraction::denominator = denominator;
     }
 
-    void Fraction::checkOverFlow(long numerator,long denominator) {
-        int max_int = std::numeric_limits<int>::max();
-        int min_int = std::numeric_limits<int>::min();
-        if (numerator > max_int || numerator < min_int ||  denominator > max_int || denominator < min_int) {
-            throw overflow_error("Fraction overflow error");
-        }
-    }
 
 
 }
