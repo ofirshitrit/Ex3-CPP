@@ -18,15 +18,9 @@ using namespace ariel;
 
 int main() {
 
-
-    std::stringstream ss;
-    ss.str("");
-    Fraction neg_frac2{3, -4};
-    ss << neg_frac2;
-    cout <<  ss.str() << endl;
-    if ( ss.str() == "3/-4" ) cout << "YES" << endl;
-    else cout << "NO" << endl;
-
+    cout << Fraction{3, 5} / Fraction{1, 1} << endl;
+     if ( Fraction{3, 5} / Fraction{1, 1} ==  Fraction{3, 5} ) cout << "yes" << endl;
+     else cout << "no" << endl;
 
 //    Fraction a(5,3), b(14,21);
 //    cout << "a: " << a << "b: " << b << endl;

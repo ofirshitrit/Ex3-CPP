@@ -14,8 +14,6 @@ namespace ariel {
 
         Fraction(float num);
 
-//        ~Fraction() = default;
-
         friend ostream &operator<<(ostream &ostr, const Fraction &frac);
 
         friend istream &operator>>(istream &input, Fraction &frac);
@@ -50,15 +48,10 @@ namespace ariel {
 
         int getNumerator() const;
 
-        void setNumerator(int numerator);
-
         int getDenominator() const;
-
-        void setDenominator(int denominator);
 
         void reduceFraction();
 
-        Fraction turnToFrac(float x);
 
     private:
         int numerator;
@@ -66,7 +59,6 @@ namespace ariel {
 
         int gcd(int num1, int num2);
 
-        void swapNumerAndDenom();
 
 
 

@@ -14,6 +14,7 @@ namespace ariel {
         if (dumer == 0) throw invalid_argument("Cannot divide by zero.");
         this->numerator = numer;
         this->denominator = dumer;
+        this->reduceFraction();
     }
 
 
@@ -31,8 +32,8 @@ namespace ariel {
         char slash;
         input >> numer >> denom;
         if (denom == 0) throw runtime_error("Cannot divide by zero.");
-        frac.setNumerator(numer);
-        frac.setDenominator(denom);
+        frac.numerator = numer;
+        frac.denominator = denom;
         frac.reduceFraction();
         return input;
     }
@@ -55,7 +56,7 @@ namespace ariel {
             throw overflow_error("Fraction overflow error");
         }
         Fraction result((int)numer,(int)denom);
-//        result.reduceFraction();
+        result.reduceFraction();
         return result;
     }
 
@@ -72,7 +73,7 @@ namespace ariel {
 
 
     Fraction operator/(const Fraction &frac1, const Fraction &frac2) {
-        if (frac2 == 0) throw runtime_error("Cannot divide by zero.");
+        if (frac2.getNumerator() == 0) throw runtime_error("Cannot divide by zero.");
         long numer = static_cast<long> (frac1.getNumerator()) * static_cast<long> (frac2.getDenominator());
         long denom = static_cast<long> (frac1.getDenominator()) * static_cast<long> (frac2.getNumerator());
         if (numer > INT_MAX || numer < INT_MIN ||  denom > INT_MAX || denom < INT_MIN) {
@@ -127,7 +128,7 @@ namespace ariel {
         return *this;
     }
 
-    Fraction Fraction::operator++(int) {
+     Fraction Fraction::operator++(int) {
         Fraction tmp = *this;
         *this = tmp + 1;
         return tmp;
@@ -152,30 +153,21 @@ namespace ariel {
         int commonFactor = gcd(numerator,denominator);
         numerator /= commonFactor;
         denominator /= commonFactor;
+        if (this->denominator < 0) {
+            this->numerator *= -1;
+            this->denominator *= -1;
+        }
     }
-
-    void Fraction::swapNumerAndDenom() {
-        int tmp = this->numerator;
-        this->numerator = this->denominator;
-        this->denominator = tmp;
-    }
-
 
     int Fraction::getNumerator() const {
         return numerator;
-    }
-
-    void Fraction::setNumerator(int numerator) {
-        Fraction::numerator = numerator;
     }
 
     int Fraction::getDenominator() const {
         return denominator;
     }
 
-    void Fraction::setDenominator(int denominator) {
-        Fraction::denominator = denominator;
-    }
+
 
 
 
